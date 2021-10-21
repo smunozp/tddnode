@@ -2,7 +2,7 @@ import pool from './postgres-conector'
 
 async function pgQuery(
   query: string,
-  values: (string | number)[] = []
+  values: (string | number | Date)[] = []
 ): Promise<string> {
   let client
   let pgCall
