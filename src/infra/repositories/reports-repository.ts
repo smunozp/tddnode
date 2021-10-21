@@ -21,7 +21,7 @@ export class ReportRepository {
   async getProjectDetail(projectName: string): Promise<QueryResult> {
     try {
       const response = await pgQuery(
-        'select  minutes_spended, project_name from project_tracking where project_name = $1',
+        'select  minutes_spended, start_time, stop_time, project_name from project_tracking where project_name = $1',
         [projectName]
       )
 

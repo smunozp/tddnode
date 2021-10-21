@@ -5,7 +5,6 @@ import {
   serverError,
   success,
 } from '../../helpers/http-helpers'
-import { TrackingProjectRepository } from '../../infra/repositories/tracking-project-repository'
 import { Controller } from '../../interfaces/controller-interface'
 import { HttpRequest, HttpResponse } from '../../interfaces/http-interface'
 

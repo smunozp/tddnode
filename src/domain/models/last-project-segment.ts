@@ -46,16 +46,20 @@ export class LastProjectSegment {
     return resultInMinutes
   }
 
-  async startRegister(): Promise<void> {
+  async startRegister(): Promise<boolean> {
     this._startTime = new Date()
     this._status = STATUS.started
+    try {
+      const trackingRepository = new TrackingProjectRepository()
 
-    const trackingRepository = new TrackingProjectRepository()
-
-    const response = await trackingRepository.startSegmentTracking(
-      this._projectName,
-      this._startTime
-    )
+      await trackingRepository.startSegmentTracking(
+        this._projectName,
+        this._startTime
+      )
+      return true
+    } catch (error) {
+      return false
+    }
   }
 
   async stopRegister(): Promise<boolean> {
