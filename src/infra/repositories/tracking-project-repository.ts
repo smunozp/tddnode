@@ -29,7 +29,7 @@ export class TrackingProjectRepository {
         'INSERT INTO project_tracking ("start_time", "project_name", "status") VALUES ($1,$2,$3) RETURNING id',
         [dateTime, projectName, STATUS.started]
       )
-      console.log(JSON.parse(response))
+      //console.log(JSON.parse(response))
 
       const responseValues = JSON.parse(response).rows
       const responseRows = JSON.parse(response).rowCount
@@ -51,7 +51,7 @@ export class TrackingProjectRepository {
         'UPDATE project_tracking SET stop_time = $1, status = $2, minutes_spended = $3 WHERE id = $4',
         [endTime, 'STOPPED', minutesSpended, trackingId]
       )
-      console.log(JSON.parse(response))
+      //console.log(JSON.parse(response))
 
       const responseValues = JSON.parse(response).rows
       const responseRows = JSON.parse(response).rowCount

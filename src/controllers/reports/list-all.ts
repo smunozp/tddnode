@@ -9,10 +9,12 @@ export class ListAllProjects implements Controller {
       const report = new ReportRepository()
 
       const reportResult = await report.getAllProjects()
-
+      const productDetails = reportResult.data.filter(
+        (row) => row.minutes !== null
+      )
       return success({
-        'projects-count': reportResult.rowCount,
-        'projects-details': reportResult.data,
+        'projects-count': productDetails.length,
+        'projects-details': productDetails,
       })
     } catch (error) {
       return serverError(error)
