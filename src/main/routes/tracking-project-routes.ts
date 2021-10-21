@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { StopTrackingProject } from '../../controllers/tracking-project/stop-tracking'
 import { AdaptRoute } from '../adapters/express-route-adapter'
-import { StartTrackingProject } from '../../controllers/tracking-project/start-tracking'
+import { makeStartTrackingProjectController } from '../factories/tracking-project/start-tracking'
+import { makeStopTrackingProjectController } from '../factories/tracking-project/stop-tracking'
 
 export default (router: Router): void => {
-  router.post('/start', AdaptRoute(new StartTrackingProject()))
+  router.post('/start', AdaptRoute(makeStartTrackingProjectController()))
 
-  router.post('/stop', AdaptRoute(new StopTrackingProject()))
+  router.post('/stop', AdaptRoute(makeStopTrackingProjectController()))
 }

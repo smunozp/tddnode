@@ -10,6 +10,7 @@ import { Controller } from '../../interfaces/controller-interface'
 import { HttpRequest, HttpResponse } from '../../interfaces/http-interface'
 
 export class ListDetailProjects implements Controller {
+  constructor(private readonly reportRepository: ReportRepository) {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     const { name } = httpRequest.query
 
@@ -17,9 +18,9 @@ export class ListDetailProjects implements Controller {
       return badRequest(new Error('Parameter "name" is missing'))
     }
     try {
-      const report = new ReportRepository()
+      
 
-      const reportResult = await report.getProjectDetail(name)
+      const reportResult = await this.reportRepository.getProjectDetail(name)
 
       if (reportResult.rowCount === 0) {
         return notFound(name)

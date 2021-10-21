@@ -4,11 +4,10 @@ import { Controller } from '../../interfaces/controller-interface'
 import { HttpResponse } from '../../interfaces/http-interface'
 
 export class ListAllProjects implements Controller {
+  constructor(private readonly reportRepository: ReportRepository) {}
   async handle(): Promise<HttpResponse> {
     try {
-      const report = new ReportRepository()
-
-      const reportResult = await report.getAllProjects()
+      const reportResult = await this.reportRepository.getAllProjects()
       const productDetails = reportResult.data.filter(
         (row) => row.minutes !== null
       )

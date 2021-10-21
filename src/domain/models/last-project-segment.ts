@@ -8,15 +8,16 @@ export class LastProjectSegment {
   private _startTime: Date
   private _endTime: Date
   private _projectExist: boolean
+  private readonly _projectTrackingRepository:TrackingProjectRepository
 
-  constructor(projectName: string) {
+  constructor(projectName: string, projectTrackingRepository:TrackingProjectRepository) {
     this._projectName = projectName
+    this._projectTrackingRepository = projectTrackingRepository
   }
 
   async getLastSegmentProject(): Promise<void> {
-    const projectTracking = new TrackingProjectRepository()
 
-    const lastSegmentResult = await projectTracking.getLastSegmentProject(
+    const lastSegmentResult = await this._projectTrackingRepository.getLastSegmentProject(
       this._projectName
     )
 
@@ -50,9 +51,8 @@ export class LastProjectSegment {
     this._startTime = new Date()
     this._status = STATUS.started
     try {
-      const trackingRepository = new TrackingProjectRepository()
 
-      await trackingRepository.startSegmentTracking(
+      await this._projectTrackingRepository.startSegmentTracking(
         this._projectName,
         this._startTime
       )
@@ -70,9 +70,8 @@ export class LastProjectSegment {
 
     const minutesSpended = this.getTrackingMinutes()
 
-    const trackingRepository = new TrackingProjectRepository()
 
-    await trackingRepository.stopSegmentTracking(
+    await this._projectTrackingRepository.stopSegmentTracking(
       this._projectName,
       minutesSpended,
       this._endTime,
