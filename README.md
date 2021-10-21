@@ -1,6 +1,6 @@
 # tddnode
 
-Run NPM Intall
+Run npm install
 
 add .env to Project
 
