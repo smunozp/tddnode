@@ -1,0 +1,159 @@
+openapi: 3.0.3
+info:
+  title: homework code
+  description: Typescript Backend API for tracking and report projects
+  contact:
+    email: snmunoz@gmail.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 1.0.0
+
+servers:
+  - url: /api/v1
+
+tags:
+  - name: reporting
+    description: Projects Reports APIs
+  - name: tracking
+    description: Tracking Project APIs
+
+paths:
+  /list-all:
+    get:
+      description: All projects, Report the list of projects and total time fot every project
+      tags:
+        - reporting
+      operationId: listAll
+
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAllResponse'
+        500:
+          description: Server Error
+  /list-detail:
+    get:
+      description: One project, Report the total time and list the individual time segments for a project
+      tags:
+        - reporting
+      operationId: listDetail
+      parameters:
+        - name: name
+          required: true
+          in: query
+          description: The name of the project
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDetailResponse'
+        400:
+          description: Bad Request, parameter "name" missing
+        404:
+          description: Not Found, Project not found on the database
+        500:
+          description: Server Error
+  /start:
+    post:
+      description: Start the timer for project
+      tags:
+        - tracking
+      operationId: start
+      requestBody:
+        description: Project Name
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestBodyTracking'
+      responses:
+        200:
+          description: Tracking Started
+        400:
+          description: Bad Request, parameter "name" missing, or Project already started
+        500:
+          description: Server Error
+  /stop:
+    post:
+      description: Stop the timer for project
+      tags:
+        - tracking
+      operationId: stop
+      requestBody:
+        description: Project Name
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestBodyTracking'
+      responses:
+        200:
+          description: Tracking Started
+        400:
+          description: Bad Request, parameter "name" missing, or Project already started
+        404:
+          description: Not Found, Project not found on the database
+        500:
+          description: Server Error
+
+components:
+  schemas:
+    ListAllResponse:
+      type: object
+      additionalProperties: false
+      required:
+        - projects-count
+        - projects-details
+      properties:
+        projects-count:
+          type: number
+        project-details:
+          type: array
+          items:
+            type: object
+            properties:
+              minutes:
+                type: number
+              project_name:
+                type: string
+    ListDetailResponse:
+      type: object
+      additionalProperties: false
+      required:
+        - projects-count
+        - projects-details
+      properties:
+        project-name:
+          type: string
+        total-minutes:
+          type: number
+        total-segments:
+          type: number
+        segments:
+          type: array
+          items:
+            type: object
+            properties:
+              startTime:
+                type: string
+              endTime:
+                type: string
+              minutes:
+                type: number
+    RequestBodyTracking:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: project name
