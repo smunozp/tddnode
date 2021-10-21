@@ -4,6 +4,7 @@ Run NPM Intall
 add .env to Project
 
 To run Tests: npm run test:unit
+
 ---------------------------------
 tracking endpoints :
 
@@ -14,6 +15,7 @@ Body:{"name": "abc"}
 -Stop Tracking
 POST http://localhost:8080/api/stop
 Body:{"name": "abc"}
+
 ---------------------------------
 report endpoints
 
