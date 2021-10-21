@@ -18,8 +18,6 @@ export class ListDetailProjects implements Controller {
       return badRequest(new Error('Parameter "name" is missing'))
     }
     try {
-      
-
       const reportResult = await this.reportRepository.getProjectDetail(name)
 
       if (reportResult.rowCount === 0) {
@@ -36,7 +34,7 @@ export class ListDetailProjects implements Controller {
         'project-name': reportDetail.projectName,
         'total-minutes': reportDetail.totalMinutes,
         'total-segments': reportDetail.totalSegments,
-        'segments': reportDetail.segments,
+        segments: reportDetail.segments,
       })
     } catch (error) {
       return serverError(error)
