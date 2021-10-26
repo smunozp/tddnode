@@ -1,4 +1,4 @@
-This is a coding challenge for applicants interested in joining Enara Health as Backend Engineers.
+This is a coding challenge for applicants interested in joining as Backend Engineers.
 We ask you to read this file carefully before you begin writing a solution.
 
 If you decide to continue with this process, write us back WHEN you expect to submit your solution before you begin implementing it. This is really important so we can better arrange to wait for you, specially if you want to take a little bit longer.
@@ -7,7 +7,6 @@ If you decide NOT to continue with this process, let us know! ... So we stop spa
 
 We sincerely thank you for your interest and your time.
 
-Best, The Enara Health team!
 
 Submit the minimum posible
 You should not implement features not required explicitely.
